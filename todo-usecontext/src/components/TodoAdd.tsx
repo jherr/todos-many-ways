@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Input, Grid } from "@chakra-ui/react";
 
-import { useTodoContext } from "../store";
+import { useTodoContext, addTodo } from "../store";
 
 function TodoAdd() {
   const [text, textSet] = React.useState("");
@@ -16,14 +16,7 @@ function TodoAdd() {
       />
       <Button
         onClick={() => {
-          todosSet((tl) => [
-            ...tl,
-            {
-              id: Math.max(0, Math.max(...tl.map(({ id }) => id))) + 1,
-              text,
-              done: false,
-            },
-          ]);
+          todosSet((tl) => addTodo(tl, text));
           textSet("");
         }}
       >

@@ -19,3 +19,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     <TodoContext.Provider value={useTodos([])}>{children}</TodoContext.Provider>
   );
 }
+
+export function addTodo(todos: Todo[], text: string) {
+  return [
+    ...todos,
+    {
+      id: Math.max(0, Math.max(...todos.map(({ id }) => id))) + 1,
+      text,
+      done: false,
+    },
+  ];
+}
