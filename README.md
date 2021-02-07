@@ -1,7 +1,7 @@
 Todo Lists Four Ways
 ====================
 
-- [ ] useState/useContext
-- [ ] valtio
-- [ ] jotai
+- [X] useState/useContext
+- [X] valtio
+- [X] jotai
 - [ ] redux
