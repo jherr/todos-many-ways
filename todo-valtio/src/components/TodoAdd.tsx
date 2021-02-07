@@ -17,7 +17,7 @@ function TodoAdd() {
       <Button
         onClick={() => {
           store.todos.push({
-            id: Math.max(...store.todos.map(({ id }) => id)) + 1,
+            id: Math.max(0, Math.max(...store.todos.map(({ id }) => id))) + 1,
             text: store.newTodo,
             done: false,
           });

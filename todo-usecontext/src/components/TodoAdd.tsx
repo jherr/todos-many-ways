@@ -19,7 +19,7 @@ function TodoAdd() {
           todosSet((tl) => [
             ...tl,
             {
-              id: Math.max(...tl.map(({ id }) => id)) + 1,
+              id: Math.max(0, Math.max(...tl.map(({ id }) => id))) + 1,
               text,
               done: false,
             },
