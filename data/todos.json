@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "text": "Get dinner fixings",
+    "done": false
+  },
+  {
+    "id": 2,
+    "text": "Cook dinner",
+    "done": false
+  },
+  {
+    "id": 3,
+    "text": "Eat dinner",
+    "done": false
+  }
+]
