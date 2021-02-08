@@ -1,9 +1,11 @@
-Todo Lists Four Ways
-====================
+Todo Lists Many Many Ways
+=========================
 
-- [X] useState/useContext
+- [X] useState
+- [X] useContext
+- [X] customHook
+- [X] mobx
+- [X] redux
 - [X] valtio
 - [X] jotai
-- [X] redux
-- [X] mobx
 - [X] zustand

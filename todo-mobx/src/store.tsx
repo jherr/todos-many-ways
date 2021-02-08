@@ -28,7 +28,6 @@ class Todos {
 
   removeTodo(id: number) {
     this.todos = removeTodo(this.todos, id);
-    this.newTodo = "";
   }
 
   addTodo() {

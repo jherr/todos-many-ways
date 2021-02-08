@@ -1,5 +1,5 @@
 {
-  "name": "todo-base",
+  "name": "todo-valtio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
