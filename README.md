@@ -6,3 +6,4 @@ Todo Lists Four Ways
 - [X] jotai
 - [X] redux
 - [X] mobx
+- [X] zustand
