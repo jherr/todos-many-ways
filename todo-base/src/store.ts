@@ -1,3 +1,4 @@
+// Standard interface and functions
 export interface Todo {
   id: number;
   text: string;

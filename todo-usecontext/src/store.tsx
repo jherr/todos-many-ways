@@ -1,23 +1,10 @@
 import * as React from "react";
 
+// Standard interface and functions
 export interface Todo {
   id: number;
   text: string;
   done: boolean;
-}
-
-const useTodos = (initial: Todo[]) => React.useState<Todo[]>(initial);
-
-const TodoContext = React.createContext<ReturnType<typeof useTodos> | null>(
-  null
-);
-
-export const useTodoContext = () => React.useContext(TodoContext)!;
-
-export function TodoProvider({ children }: { children: React.ReactNode }) {
-  return (
-    <TodoContext.Provider value={useTodos([])}>{children}</TodoContext.Provider>
-  );
 }
 
 export const updateTodo = (todos: Todo[], id: number, text: string): Todo[] =>
@@ -43,3 +30,18 @@ export const addTodo = (todos: Todo[], text: string): Todo[] => [
     done: false,
   },
 ];
+
+// useContext implementation
+const useTodos = (initial: Todo[]) => React.useState<Todo[]>(initial);
+
+const TodoContext = React.createContext<ReturnType<typeof useTodos> | null>(
+  null
+);
+
+export const useTodoContext = () => React.useContext(TodoContext)!;
+
+export function TodoProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <TodoContext.Provider value={useTodos([])}>{children}</TodoContext.Provider>
+  );
+}

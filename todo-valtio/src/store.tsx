@@ -1,5 +1,12 @@
 import { proxy } from "valtio";
 
+// Standard interface and functions
+export interface Todo {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
 const updateTodo = (todos: Todo[], id: number, text: string): Todo[] =>
   todos.map((todo) => ({
     ...todo,
@@ -24,12 +31,7 @@ const addTodo = (todos: Todo[], text: string): Todo[] => [
   },
 ];
 
-export interface Todo {
-  id: number;
-  text: string;
-  done: boolean;
-}
-
+// Valtio implementation
 interface Store {
   todos: Todo[];
   newTodo: string;

@@ -1,5 +1,6 @@
 import create from "zustand";
 
+// Standard interface and functions
 export interface Todo {
   id: number;
   text: string;
@@ -30,6 +31,7 @@ const addTodo = (todos: Todo[], text: string): Todo[] => [
   },
 ];
 
+// Zustand implementation
 type Store = {
   todos: Todo[];
   newTodo: string;

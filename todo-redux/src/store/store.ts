@@ -12,6 +12,7 @@ import {
 } from "./actions";
 import { Store, Todo } from "./types";
 
+// Standard interface and functions
 const updateTodo = (todos: Todo[], id: number, text: string): Todo[] =>
   todos.map((todo) => ({
     ...todo,
@@ -36,6 +37,7 @@ const addTodo = (todos: Todo[], text: string): Todo[] => [
   },
 ];
 
+// Redux implementation
 function todoReducer(
   state: Store = {
     todos: [],

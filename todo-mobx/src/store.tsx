@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
+// Standard interface and functions
 interface Todo {
   id: number;
   text: string;
@@ -18,6 +19,7 @@ const addTodo = (todos: Todo[], text: string): Todo[] => [
   },
 ];
 
+// MobX implementation
 class Todos {
   todos: Todo[] = [];
   newTodo: string = "";

@@ -1,14 +1,11 @@
 import * as React from "react";
 
+// Standard interface and functions
 export interface Todo {
   id: number;
   text: string;
   done: boolean;
 }
-
-export const useTodos = (initial: Todo[]) => React.useState<Todo[]>(initial);
-export type TodosType = ReturnType<typeof useTodos>[0];
-export type SetTodosType = ReturnType<typeof useTodos>[1];
 
 export const updateTodo = (todos: Todo[], id: number, text: string): Todo[] =>
   todos.map((todo) => ({
@@ -33,3 +30,8 @@ export const addTodo = (todos: Todo[], text: string): Todo[] => [
     done: false,
   },
 ];
+
+// useState implementation
+export const useTodos = (initial: Todo[]) => React.useState<Todo[]>(initial);
+export type TodosType = ReturnType<typeof useTodos>[0];
+export type SetTodosType = ReturnType<typeof useTodos>[1];
