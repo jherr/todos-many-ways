@@ -10,27 +10,17 @@ function TodoListItems() {
       {store.todos.map((todo) => (
         <Flex pt={2} key={todo.id}>
           <Checkbox
-            onClick={(evt) => {
-              store.todos = store.todos.map((t) => ({
-                ...t,
-                done: t.id === todo.id ? !t.done : t.done,
-              }));
-            }}
+            onClick={() => (todo.done = !todo.done)}
             checked={todo.done}
           />
           <Input
             mx={2}
             value={todo.text}
-            onChange={(evt) => {
-              store.todos = store.todos.map((t) => ({
-                ...t,
-                text: t.id === todo.id ? evt.target.value : t.text,
-              }));
-            }}
+            onChange={(evt) => (todo.text = evt.target.value)}
           />
           <Button
             onClick={() => {
-              store.todos = store.todos.filter((t) => t.id !== todo.id);
+              store.removeTodo(todo.id);
             }}
           >
             Delete

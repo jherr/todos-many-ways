@@ -11,31 +11,15 @@ function TodoListItems() {
       {snapshot.todos.map((todo: Todo) => (
         <Flex pt={2} key={todo.id}>
           <Checkbox
-            onClick={(evt) => {
-              store.todos = snapshot.todos.map((t) => ({
-                ...t,
-                done: t.id === todo.id ? !t.done : t.done,
-              }));
-            }}
+            onClick={() => store.toggleTodo(todo.id)}
             checked={todo.done}
           />
           <Input
             mx={2}
             value={todo.text}
-            onChange={(evt) => {
-              store.todos = snapshot.todos.map((t) => ({
-                ...t,
-                text: t.id === todo.id ? evt.target.value : t.text,
-              }));
-            }}
+            onChange={(evt) => store.updateTodo(todo.id, evt.target.value)}
           />
-          <Button
-            onClick={() => {
-              store.todos = snapshot.todos.filter((t) => t.id !== todo.id);
-            }}
-          >
-            Delete
-          </Button>
+          <Button onClick={() => store.removeTodo(todo.id)}>Delete</Button>
         </Flex>
       ))}
     </>

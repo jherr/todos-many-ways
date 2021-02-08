@@ -6,6 +6,18 @@ interface Todo {
   done: boolean;
 }
 
+const removeTodo = (todos: Todo[], id: number): Todo[] =>
+  todos.filter((todo) => todo.id !== id);
+
+const addTodo = (todos: Todo[], text: string): Todo[] => [
+  ...todos,
+  {
+    id: Math.max(0, Math.max(...todos.map(({ id }) => id))) + 1,
+    text,
+    done: false,
+  },
+];
+
 class Todos {
   todos: Todo[] = [];
   newTodo: string = "";
@@ -14,15 +26,13 @@ class Todos {
     makeAutoObservable(this);
   }
 
+  removeTodo(id: number) {
+    this.todos = removeTodo(this.todos, id);
+    this.newTodo = "";
+  }
+
   addTodo() {
-    this.todos = [
-      ...this.todos,
-      {
-        id: Math.max(0, Math.max(...this.todos.map(({ id }) => id))) + 1,
-        text: this.newTodo,
-        done: false,
-      },
-    ];
+    this.todos = addTodo(this.todos, this.newTodo);
     this.newTodo = "";
   }
 

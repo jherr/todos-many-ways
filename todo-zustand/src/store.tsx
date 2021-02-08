@@ -6,14 +6,38 @@ export interface Todo {
   done: boolean;
 }
 
+const updateTodo = (todos: Todo[], id: number, text: string): Todo[] =>
+  todos.map((todo) => ({
+    ...todo,
+    text: todo.id === id ? text : todo.text,
+  }));
+
+const toggleTodo = (todos: Todo[], id: number): Todo[] =>
+  todos.map((todo) => ({
+    ...todo,
+    done: todo.id === id ? !todo.done : todo.done,
+  }));
+
+const removeTodo = (todos: Todo[], id: number): Todo[] =>
+  todos.filter((todo) => todo.id !== id);
+
+const addTodo = (todos: Todo[], text: string): Todo[] => [
+  ...todos,
+  {
+    id: Math.max(0, Math.max(...todos.map(({ id }) => id))) + 1,
+    text,
+    done: false,
+  },
+];
+
 type Store = {
   todos: Todo[];
   newTodo: string;
   setTodos: (todos: Todo[]) => void;
   addTodo: () => void;
-  setText: (id: number, text: string) => void;
-  toggle: (id: number) => void;
-  remove: (id: number) => void;
+  updateTodo: (id: number, text: string) => void;
+  toggleTodo: (id: number) => void;
+  removeTodo: (id: number) => void;
   setNewTodo: (newTodo: string) => void;
 };
 
@@ -26,26 +50,20 @@ const useStore = create<Store>(
         ...state,
         todos,
       })),
-    remove: (id: number) =>
+    removeTodo: (id: number) =>
       set((state) => ({
         ...state,
-        todos: state.todos.filter((t) => t.id !== id),
+        todos: removeTodo(state.todos, id),
       })),
-    setText: (id: number, text: string) =>
+    updateTodo: (id: number, text: string) =>
       set((state) => ({
         ...state,
-        todos: state.todos.map((t) => ({
-          ...t,
-          text: t.id === id ? text : t.text,
-        })),
+        todos: updateTodo(state.todos, id, text),
       })),
-    toggle: (id: number) =>
+    toggleTodo: (id: number) =>
       set((state) => ({
         ...state,
-        todos: state.todos.map((t) => ({
-          ...t,
-          done: t.id === id ? !t.done : t.done,
-        })),
+        todos: toggleTodo(state.todos, id),
       })),
     setNewTodo: (newTodo: string) =>
       set((state) => ({
@@ -55,14 +73,7 @@ const useStore = create<Store>(
     addTodo: () =>
       set((state) => ({
         ...state,
-        todos: [
-          ...state.todos,
-          {
-            id: Math.max(0, Math.max(...state.todos.map(({ id }) => id))) + 1,
-            text: state.newTodo,
-            done: false,
-          },
-        ],
+        todos: addTodo(state.todos, state.newTodo),
         newTodo: "",
       })),
   })

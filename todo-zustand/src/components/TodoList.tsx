@@ -11,15 +11,15 @@ function TodoListItems() {
       {store.todos.map((todo) => (
         <Flex pt={2} key={todo.id}>
           <Checkbox
-            onClick={(evt) => store.toggle(todo.id)}
+            onClick={() => store.toggleTodo(todo.id)}
             checked={todo.done}
           />
           <Input
             mx={2}
             value={todo.text}
-            onChange={(evt) => store.setText(todo.id, evt.target.value)}
+            onChange={(evt) => store.updateTodo(todo.id, evt.target.value)}
           />
-          <Button onClick={() => store.remove(todo.id)}>Delete</Button>
+          <Button onClick={() => store.removeTodo(todo.id)}>Delete</Button>
         </Flex>
       ))}
     </>

@@ -10,7 +10,31 @@ import {
   SET_TODOS,
   ActionTypes,
 } from "./actions";
-import { Store } from "./types";
+import { Store, Todo } from "./types";
+
+const updateTodo = (todos: Todo[], id: number, text: string): Todo[] =>
+  todos.map((todo) => ({
+    ...todo,
+    text: todo.id === id ? text : todo.text,
+  }));
+
+const toggleTodo = (todos: Todo[], id: number): Todo[] =>
+  todos.map((todo) => ({
+    ...todo,
+    done: todo.id === id ? !todo.done : todo.done,
+  }));
+
+const removeTodo = (todos: Todo[], id: number): Todo[] =>
+  todos.filter((todo) => todo.id !== id);
+
+const addTodo = (todos: Todo[], text: string): Todo[] => [
+  ...todos,
+  {
+    id: Math.max(0, Math.max(...todos.map(({ id }) => id))) + 1,
+    text,
+    done: false,
+  },
+];
 
 function todoReducer(
   state: Store = {
@@ -33,36 +57,23 @@ function todoReducer(
     case UPDATE_TODO:
       return {
         ...state,
-        todos: state.todos.map((t) => ({
-          ...t,
-          text: t.id === action.payload.id ? action.payload.text : t.text,
-        })),
+        todos: updateTodo(state.todos, action.payload.id, action.payload.text),
       };
     case TOGGLE_TODO:
       return {
         ...state,
-        todos: state.todos.map((t) => ({
-          ...t,
-          done: t.id === action.payload ? !t.done : t.done,
-        })),
+        todos: toggleTodo(state.todos, action.payload),
       };
     case DELETE_TODO:
       return {
         ...state,
-        todos: state.todos.filter((t) => t.id !== action.payload),
+        todos: removeTodo(state.todos, action.payload),
       };
     case ADD_TODO:
       return {
         ...state,
         newTodo: "",
-        todos: [
-          ...state.todos,
-          {
-            id: Math.max(0, Math.max(...state.todos.map(({ id }) => id))) + 1,
-            text: state.newTodo,
-            done: false,
-          },
-        ],
+        todos: addTodo(state.todos, state.newTodo),
       };
     default:
       return state;
