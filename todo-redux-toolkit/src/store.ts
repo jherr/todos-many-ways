@@ -39,10 +39,11 @@ const addTodoToList = (todos: Todo[], text: string): Todo[] => [
 ];
 
 // Redux toolkit implementation
-const initialState: {
+interface State {
   todos: Todo[];
   newTodo: string;
-} = {
+}
+const initialState: State = {
   todos: [],
   newTodo: "",
 };
@@ -90,10 +91,7 @@ const store = configureStore({
   devTools: true,
 });
 
-type AppDispatch = typeof store.dispatch;
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-
-type RootState = ReturnType<typeof store.getState>;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch = () => useDispatch<typeof store.dispatch>();
+export const useAppSelector: TypedUseSelectorHook<State> = useSelector;
 
 export default store;
