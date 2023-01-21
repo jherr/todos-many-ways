@@ -11,8 +11,8 @@ function TodoListItems() {
       {store.todos.map((todo) => (
         <Flex pt={2} key={todo.id}>
           <Checkbox
-            onClick={() => store.toggleTodo(todo.id)}
-            checked={todo.done}
+            onChange={() => store.toggleTodo(todo.id)}
+            isChecked={todo.done}
           />
           <Input
             mx={2}
